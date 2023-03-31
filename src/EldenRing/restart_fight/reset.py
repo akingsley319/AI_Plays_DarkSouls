@@ -3,13 +3,17 @@ import shutil
 import pydirectinput
 
 import time
-from DarkSouls1.restart_fight.config import SOURCE_DIRECTORY, DESTINATION_DIRECTORY, STATE_NAME, STATE_NUMBER
+from EldenRing.restart_fight.config import SOURCE_DIRECTORY, DESTINATION_DIRECTORY, STATE_NAME, STATE_NUMBER, \
+                                           BACKUP_STATE_NAME
 
 
 class Reset:
-    def __init__(self, source_directory, destination_directory, state_name, state_number):
+    def __init__(self, source_directory, destination_directory, state_name, state_number, backup_name):
         self.SOURCE_STATE = os.path.join(source_directory, state_name).replace('\\', '/')
-        self.DESTINATION_STATE = os.path.join(destination_directory, state_name).replace('\\', '/')
+        self.BACKUP_SOURCE = os.path.join(source_directory, backup_name).replace('\\', '/')
+        if backup_name is not None:
+            self.DESTINATION_STATE = os.path.join(destination_directory, state_name).replace('\\', '/')
+            self.BACKUP_DESTINATION = os.path.join(destination_directory, backup_name).replace('\\', '/')
         self.STATE_NUMBER = state_number
 
     # exits to main menu, so that we can reload at desired save state
@@ -26,6 +30,8 @@ class Reset:
     # replaces save state with desired state
     def reset_save(self):
         shutil.copy(self.SOURCE_STATE, self.DESTINATION_STATE)
+        if self.BACKUP_SOURCE:
+            shutil.copy(self.BACKUP_SOURCE, self.BACKUP_DESTINATION)
 
     # loads up replaced state
     def load_save(self):
@@ -44,7 +50,7 @@ class Reset:
 
 if __name__ == '__main__':
     time.sleep(10)
-    reset_boss = Reset(SOURCE_DIRECTORY, DESTINATION_DIRECTORY, STATE_NAME, STATE_NUMBER)
+    reset_boss = Reset(SOURCE_DIRECTORY, DESTINATION_DIRECTORY, STATE_NAME, STATE_NUMBER, BACKUP_STATE_NAME)
     reset_boss.exit_to_main_menu()
     time.sleep(2)  # waits for game to get to menu before replacing state
     reset_boss.reset_save()
