@@ -12,3 +12,6 @@ STATE_NAME = "ER0000.sl2"
 
 # Location of save character in load menu: 0 is the topmost spot
 STATE_NUMBER = 6
+
+# Messages displayed when a boss is defeated
+victory_messages = ['ENEMY FELLED', 'GREAT ENEMY FELLED', 'LEGEND FELLED', 'GOD SLAIN']
