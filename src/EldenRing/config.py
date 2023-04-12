@@ -3,7 +3,7 @@ Config file for all Elden Ring
 """
 
 # Directory for boss save states and current save state location
-SOURCE_DIRECTORY = "D:/Documents/ai_plays_ds/resources/EldenRing/SaveStates"
+SOURCE_DIRECTORY = "D:/Documents/ai_plays_ds/resources/EldenRing/SaveStates/Margit"
 DESTINATION_DIRECTORY = "C:/Users/cubs1/AppData/Roaming/EldenRing/76561198099506921"
 
 # Name of save in directory

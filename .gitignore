@@ -8,6 +8,8 @@
 *.so
 *.idea
 resources/EldenRing/BossImages/*
+*.txt
+*.png
 
 # Packages #
 ############
