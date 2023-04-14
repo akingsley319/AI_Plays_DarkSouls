@@ -42,4 +42,7 @@ class Reset:
     # enter boss fog, open door, etc.
     @staticmethod
     def start_boss():
+        pydirectinput.keyDown('w')
+        time.sleep(2)
+        pydirectinput.keyUp('w')
         pydirectinput.press('up')
