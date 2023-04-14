@@ -1,8 +1,8 @@
 import torch
 
 
-TRAIN_PATH = "..resources/EldenRing/BossImages/margityolo/train"
-VALIDATION_PATH = "..resources/EldenRing/BossImages/margityolo/valid"
+TRAIN_PATH = "../resources/EldenRing/BossImages/margityolo/train"
+VALIDATION_PATH = "../resources/EldenRing/BossImages/margityolo/valid"
 
 BATCH_SIZE = 4 # increase / decrease according to GPU memory
 RESIZE_HEIGHT = 270 # resize the image for training and transforms

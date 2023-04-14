@@ -6,7 +6,8 @@ import numpy as np
 
 # We will be defining training and validation augmentation here
 from albumentations.pytorch import ToTensorV2
-from config import DEVICE, CLASSES as classes
+from src.EldenRing.boss_detection.config import DEVICE
+
 
 # will retrieve the labels of a corresponding image
 def retrieve_labels(images_path, labels_path):
