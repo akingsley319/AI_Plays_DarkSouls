@@ -10,12 +10,19 @@ class TextExtractor:
         self.words = words
 
     # noinspection PyMethodMayBeStatic
-    def extract_text(self, image):
+    def extract_text(self, image, crop=None):
+        # Crops image if coordinates are supplied
+        if crop is not None:
+            image = image.crop(crop)
         return pytesseract.image_to_string(image)
 
-    def determine_state(self, image):
-        text = self.extract_text(image)
-        if text in self.words:
-            return True
-        else:
-            return False
+    def determine_state(self, image, crop=None):
+        # Extract text and separate them by perceived word
+        text = self.extract_text(image, crop)
+        text_seperated = text.strip().split(" ")
+        # Check each retrieved word; if none found, return False, otherwise return True for any matches found
+        for word in text_seperated:
+            if word in self.words:
+                return True
+        return False
+

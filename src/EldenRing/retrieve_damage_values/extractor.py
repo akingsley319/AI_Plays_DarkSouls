@@ -1,6 +1,6 @@
 from pytesseract import pytesseract
-from src.EldenRing.text_extraction.config import PATH_TO_TESSERACT
-
+from src.EldenRing.retrieve_damage_values.config import PATH_TO_TESSERACT, threshold
+from PIL import ImageOps
 
 class DamageValueExtractor:
     def __init__(self):
@@ -10,19 +10,29 @@ class DamageValueExtractor:
         self.damage_value = 0
 
     # noinspection PyMethodMayBeStatic
-    def extract_text(self, image):
-        return pytesseract.image_to_string(image)
+    def extract_text(self, image, crop=None, thresh=threshold):
+        # Crops image if coordinates are supplied
+        if crop is not None:
+            image = image.crop(crop)
+            image = image.point(lambda p: 255 if p > thresh else 0)
+            image = image.convert('1')
+            image = ImageOps.invert(image)
+        out_text = pytesseract.image_to_string(image, config="--psm 7 digits")
+        return out_text.strip()
 
-    def determine_state(self, image):
-        text = self.extract_text(image)
+    def determine_state(self, image, crop=None, thresh=threshold):
+        text = self.extract_text(image.convert('L'), crop, thresh)
         # if text is empty, no damage is being done
         if len(text) == 0:
             self.damage_value = 0
             return self.damage_value
-        # if text cannot be converted to int, we assume damage does not track and wait to try again
+        # Check if text is a numerical value, update damage value for reward purposes
         elif text.isdigit():
             output = self.handle_digit(int(text))
             return output
+        # if text cannot be converted to int, we assume damage does not track and wait to try again
+        else:
+            return 0
 
     def handle_digit(self, value):
         # if the new value is greater than the previous value, we track the difference for reward
