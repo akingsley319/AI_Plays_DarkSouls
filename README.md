@@ -8,3 +8,8 @@ This project will focus on beating bosses, and not navigating the world. While t
 
 Object Detection using FasterRCNN was used to reward the AI for keeping the boss on screen, speeding up training while simultaneously rewarding the AI for staying alive. Bounding Box definition was performed manually using Label Studio.
 
+# Image Detection
+
+Various parts of the visible screen are tracked for a variety of purposes. These purposes include starting agent training, restarting the environment, and giving feedback for the purpose of providing rewards and penalties to the agent.
+
+More information on Object Detection and Image Detection, along with various examples, can be found in the *screengrab_configuration* document in the **docs** folder.
