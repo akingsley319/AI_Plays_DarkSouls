@@ -22,7 +22,7 @@ class TextExtractor:
         text_seperated = text.strip().split(" ")
         # Check each retrieved word; if none found, return False, otherwise return True for any matches found
         for word in text_seperated:
-            if word in self.words:
+            if word.upper() in self.words:
                 return True
         return False
 

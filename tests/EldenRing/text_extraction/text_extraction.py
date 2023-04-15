@@ -1,7 +1,8 @@
 # Import text extraction module
 from src.EldenRing.text_extraction.extractor import TextExtractor
 # Import values
-from src.EldenRing.text_extraction.config import youdied_words, victory_words, youdied_crop, victory_crop
+from src.EldenRing.text_extraction.config import youdied_words, victory_words, bossname_words,\
+                                                    youdied_crop, victory_crop, bossname_crop
 # File traversal
 import os
 # For image retrieval and manipulation
@@ -11,6 +12,7 @@ from PIL import Image
 # Instantiate Text Extractor objects
 youdied_extractor = TextExtractor(youdied_words)
 victory_extractor = TextExtractor(victory_words)
+bossname_extractor = TextExtractor(bossname_words)
 
 # Where the calibration images were saved
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
@@ -44,5 +46,15 @@ for i in range(len(image_list)):
     expected_text = expected_texts[i]
     retrieved_text = victory_extractor.extract_text(image, victory_crop)
     outcome = victory_extractor.determine_state(image, victory_crop)
+    result = "Success" if outcome == expected_outcome[i] else "Failure"
+    print("     Result: " + str(result))
+
+# Run checker for Boss Name Extractor
+expected_outcome = [True, False, True]
+print("Text Extractor: Boss Name")
+for i in range(len(image_list)):
+    image = image_list[i]
+    retrieved_text = bossname_extractor.extract_text(image, bossname_crop)
+    outcome = bossname_extractor.determine_state(image, bossname_crop)
     result = "Success" if outcome == expected_outcome[i] else "Failure"
     print("     Result: " + str(result))
