@@ -13,7 +13,7 @@ class PlayerHealthTracker:
 
     def health_loss_check(self, image):
         # find region of health bar
-        left, top, right, bottom, _ = region_extraction(image, self.current_health_crop)
+        left, top, right, bottom = region_extraction(image, self.current_health_crop)
         # update health
         if right - left < self.current_health_crop[2] - self.current_health_crop[0]:
             new_left = self.current_health_crop[0] + left
@@ -21,12 +21,11 @@ class PlayerHealthTracker:
             new_right = self.current_health_crop[0] + right + left
             new_lower = self.current_health_crop[3]
             self.current_health_crop = (new_left, new_upper, new_right, new_lower)
-        return image.crop(self.current_health_crop), right - left
-        #return Image.fromarray(ROI), right - left
+        return image.crop(self.current_health_crop), (right - left)
 
     def max_health(self, image):
         # find region of health bar
-        left, top, right, bottom, _ = region_extraction(image, self.max_health_crop)
+        left, top, right, bottom = region_extraction(image, self.max_health_crop)
         # redefine the pixels describing player health
         new_left = self.max_health_crop[0] + left
         new_upper = self.max_health_crop[1] + top
@@ -34,7 +33,7 @@ class PlayerHealthTracker:
         new_lower = self.max_health_crop[1] + top + bottom
         self.max_health_crop = (new_left, new_upper, new_right, new_lower)
         self.current_health_crop = self.max_health_crop
-        return image.crop(self.max_health_crop), right - left
+        return image.crop(self.max_health_crop), (right - left)
 
     def reset_health(self):
         self.current_health_crop = self.max_health_crop

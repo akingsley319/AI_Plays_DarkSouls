@@ -20,19 +20,22 @@ IMAGE_CALIBRATION_PATH = os.path.join(project_root, IMAGE_CALIBRATION_PATH).repl
 
 # This fully reaches out to the necessary image for calibration
 image_names = ["43fc0ba6-411.png", "0b078464-215.png", "0bfd9462-86.png", "0bc1828a-463.png", "1fca124b-198.png",
-               "3d77a205-429.png", "4c882f2d-482.png"]
+               "3d77a205-429.png", "4c882f2d-482.png", "43fc0ba6-411.png"]
 image_paths = [os.path.join(IMAGE_CALIBRATION_PATH, image_name).replace("\\", "/") for image_name in image_names]
+you_died_image_path = project_root.replace("\\", "/").replace("tests", "") + \
+                      "/resources/EldenRing/CalibrateScreenGrabs/YouDied.png"
+image_paths.append(you_died_image_path)
 image_list = [Image.open(path) for path in image_paths]
 
 image_list[0].crop(player_health.max_health_crop).show()
-for i in range(len(image_names)):
+for i in range(len(image_list)):
     image = image_list[i]
+    #image.show()
     if i == 0:
         img, value = player_health.max_health(image)
         print("Max Health Value: {}".format(value))
     else:
         img, value = player_health.health_loss_check(image)
         print("Health Bar Value: {}".format(value))
-    img.show()
+    #img.show()
     player_health.reset_health()
-

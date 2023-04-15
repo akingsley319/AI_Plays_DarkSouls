@@ -25,13 +25,16 @@ def region_extraction(img, crop, red_thresh=threshold_red, green_thresh=threshol
     na = np.array(cropped_image)
     # Find all pixels in cropped portion that are within set color threshold
     coords = set_threshold(na, red_thresh, green_thresh, blue_thresh)
-    Y = [int(item[0]) for item in coords]
-    Y.sort()
-    X = [int(item[1]) for item in coords]
-    X.sort()
-    # Find first and last row/column containing red pixels
-    top, bottom = Y[0], Y[-1]
-    left, right = X[0], X[-1]
-    # Extract Region of Interest
-    ROI = na[top:bottom, left:right]
-    return left, top, right, bottom, ROI
+    if len(coords) != 0:
+        # extract Y and X coordinates of desired pixels and sort the values in ascending order
+        Y = [int(item[0]) for item in coords]
+        X = [int(item[1]) for item in coords]
+        Y.sort()
+        X.sort()
+        # Find first and last row/column containing red pixels
+        top, bottom = Y[0], Y[-1]
+        left, right = X[0], X[-1]
+        return left, top, right, bottom
+    elif len(coords) == 0:
+        return 0, 0, 0, 0
+
