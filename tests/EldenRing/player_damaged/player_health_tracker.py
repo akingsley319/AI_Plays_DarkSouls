@@ -30,12 +30,12 @@ image_list = [Image.open(path) for path in image_paths]
 image_list[0].crop(player_health.max_health_crop).show()
 for i in range(len(image_list)):
     image = image_list[i]
-    #image.show()
+    # image.show()
     if i == 0:
         img, value = player_health.max_health(image)
         print("Max Health Value: {}".format(value))
     else:
         img, value = player_health.health_loss_check(image)
         print("Health Bar Value: {}".format(value))
-    #img.show()
+    # img.show() if value > 0 else player_health.reset_health()
     player_health.reset_health()
