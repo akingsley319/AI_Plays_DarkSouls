@@ -1,5 +1,5 @@
 from pytesseract import pytesseract
-from src.EldenRing.retrieve_damage_values.config import PATH_TO_TESSERACT, threshold
+from src.EldenRing.retrieve_damage_values.config import PATH_TO_TESSERACT, threshold, damage_value_crop
 from PIL import ImageOps
 
 class DamageValueExtractor:
@@ -10,7 +10,7 @@ class DamageValueExtractor:
         self.damage_value = 0
 
     # noinspection PyMethodMayBeStatic
-    def extract_text(self, image, crop=None, thresh=threshold):
+    def extract_text(self, image, crop=damage_value_crop, thresh=threshold):
         # Crops image if coordinates are supplied
         if crop is not None:
             image = image.crop(crop)
@@ -20,7 +20,7 @@ class DamageValueExtractor:
         out_text = pytesseract.image_to_string(image, config="--psm 7 digits")
         return out_text.strip()
 
-    def determine_state(self, image, crop=None, thresh=threshold):
+    def determine_state(self, image, crop=damage_value_crop, thresh=threshold):
         text = self.extract_text(image.convert('L'), crop, thresh)
         # if text is empty, no damage is being done
         if len(text) == 0:
