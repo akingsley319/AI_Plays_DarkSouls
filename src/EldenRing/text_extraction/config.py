@@ -20,7 +20,13 @@ youdied_crop = (750, 510, 1170, 590)
 victory_crop = (450, 510, 1470, 590)
 bossname_crop = (460, 840, 800, 867)
 
-left = 460
-upper = 840
-right = 800
-lower = 867
+youdied_thresh_min = (100, 0, 0)
+youdied_thresh_max = (150, 30, 30)
+victory_thresh_min = (200, 170, 40)
+victory_thresh_max = (250, 200, 70)
+bossname_thresh_min = (90, 90, 90)
+bossname_thresh_max = (150, 150, 150)
+
+youdied_thresh = 30
+victory_thresh = 170
+bossname_thresh = 140

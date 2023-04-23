@@ -2,7 +2,8 @@
 from src.EldenRing.text_extraction.extractor import TextExtractor
 # Import values
 from src.EldenRing.text_extraction.config import youdied_words, victory_words, bossname_words,\
-                                                    youdied_crop, victory_crop, bossname_crop
+                                                    youdied_crop, victory_crop, bossname_crop,\
+                                                    youdied_thresh, victory_thresh, bossname_thresh
 # File traversal
 import os
 # For image retrieval and manipulation
@@ -10,9 +11,9 @@ from PIL import Image
 
 
 # Instantiate Text Extractor objects
-youdied_extractor = TextExtractor(youdied_words)
-victory_extractor = TextExtractor(victory_words)
-bossname_extractor = TextExtractor(bossname_words)
+youdied_extractor = TextExtractor(youdied_words, youdied_thresh)
+victory_extractor = TextExtractor(victory_words, victory_thresh)
+bossname_extractor = TextExtractor(bossname_words, bossname_thresh)
 
 # Where the calibration images were saved
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))

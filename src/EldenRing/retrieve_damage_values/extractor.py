@@ -2,6 +2,7 @@ from pytesseract import pytesseract
 from src.EldenRing.retrieve_damage_values.config import PATH_TO_TESSERACT, threshold, damage_value_crop
 from PIL import ImageOps
 
+
 class DamageValueExtractor:
     def __init__(self):
         # sets path to pytesseract module

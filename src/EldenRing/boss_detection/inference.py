@@ -31,19 +31,6 @@ class BossDetectionReturn:
         image_resized = torch.unsqueeze(image_resized, 0)
         with torch.no_grad():
             outputs = self.model(image_resized)
-
         # load all detection to CPU for further operations
         outputs = [{k: v.to('cpu') for k, v in t.items()} for t in outputs]
         return image_resized, outputs
-        # carry further only if there are detected boxes
-        """
-        if len(outputs[0]['boxes']) > 0:
-            boxes = outputs[0]['boxes'].data.numpy()
-            scores = outputs[0]['scores'].data.numpy()
-            # filter out boxes according to `detection_threshold`
-            boxes = boxes[scores >= self.detection_threshold]
-            return boxes, scores
-        else:
-            return None, None
-        """
-
