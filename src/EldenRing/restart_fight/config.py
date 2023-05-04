@@ -11,9 +11,9 @@ STATE_NAME = "ER0000.sl2"
 STATE_NUMBER = 6
 
 # Offsets for boss health
-boss_flag_pointer = 0x7FF7204BF238
-warp_pointer = 0x7FF7204BCDD8
-camera_pointer = 0x7FF71C7C0023
+boss_flag_pointer = 0x7FF7204BF238  # EventFlagMan
+warp_pointer = 0x7FF7204BCDD8  # WorldChrMan
+camera_pointer = 0x7FF71C7C0023  # camdar
 boss_addr = {
     "Margit, the Fell Omen": {
         "flag_offsets": [0x28, 0x151C39],

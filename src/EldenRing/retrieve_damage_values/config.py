@@ -14,9 +14,3 @@ threshold = 150
 
 # Game base address
 process_name = "eldenring.exe"
-
-# Offsets for player health
-player_health_offsets = []
-player_static_address_offset = 0x00
-
-
