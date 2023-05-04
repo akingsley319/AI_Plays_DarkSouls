@@ -13,17 +13,10 @@ damage_value_crop = (1400, 840, 1470, 860)
 threshold = 150
 
 # Game base address
-process_name = "EldenRing.exe"
-base_address = 0x00
+process_name = "eldenring.exe"
 
 # Offsets for player health
 player_health_offsets = []
 player_static_address_offset = 0x00
 
-# Offsets for boss health
-boss_health_offsets = {
-    "Margit, the Fell Omen": {
-        "health_offsets": [],
-        "static_address_offset": 0x00
-    }
-}
+
